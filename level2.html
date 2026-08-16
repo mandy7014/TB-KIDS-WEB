@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>第二關｜傳染大挑戰</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <main class="game-page">
+
+        <div class="game-card">
+
+
+            <!-- 標題 -->
+
+            <div class="game-header">
+
+                <span>
+                    🦠 第二關
+                </span>
+
+                <span id="level2-score">
+                    ⭐ 0 / 4
+                </span>
+
+            </div>
+
+
+            <h1>
+                🌬️ 傳染大挑戰
+            </h1>
+
+
+            <p class="level-description">
+
+                肺結核主要可以透過空氣傳播。
+
+                <br>
+
+                看看下面的情境，
+                判斷它和空氣傳播有沒有關係吧！
+
+            </p>
+
+
+            <!-- 情境 -->
+
+            <div class="scenario-box">
+
+                <div
+                    id="scenario-icon"
+                    class="scenario-icon"
+                >
+                    😷
+                </div>
+
+
+                <h2 id="scenario-title">
+
+                    情境 1
+
+                </h2>
+
+
+                <p id="scenario-text">
+
+                    有肺結核的患者在室內咳嗽。
+
+                </p>
+
+            </div>
+
+
+            <!-- 選擇 -->
+
+            <div class="answer-options">
+
+
+                <button
+                    class="answer"
+                    onclick="answerLevel2(true)"
+                >
+
+                    🌬️ 有關
+
+                </button>
+
+
+                <button
+                    class="answer"
+                    onclick="answerLevel2(false)"
+                >
+
+                    🙅 沒有關係
+
+                </button>
+
+
+            </div>
+
+
+            <!-- 回饋 -->
+
+            <div
+                id="level2-feedback"
+                class="feedback"
+            ></div>
+
+
+            <!-- 下一題 -->
+
+            <button
+                id="next-question"
+                class="start-button"
+                onclick="nextLevel2Question()"
+                style="display:none;"
+            >
+
+                👉 下一題
+
+            </button>
+
+
+            <!-- 完成 -->
+
+            <button
+                id="finish-level2"
+                class="start-button"
+                onclick="finishLevel2()"
+                style="display:none;"
+            >
+
+                🏅 完成第二關
+
+            </button>
+
+
+        </div>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>肺肺王國冒險地圖</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <main class="map-page">
+
+        <div class="map-card">
+
+            <p class="small-title">
+                🌈 肺肺王國冒險地圖
+            </p>
+
+            <h1>
+                🗺️ 開始你的冒險！
+            </h1>
+
+            <p class="map-intro">
+                一起完成所有任務，
+                成為真正的肺肺守護者！
+            </p>
+
+
+            <!-- 關卡地圖 -->
+
+            <div class="level-map">
+
+
+                <!-- 第一關 -->
+
+                <a
+    href="level1.html"
+    class="level level-1 unlocked"
+>
+
+    <span class="level-icon">
+        🫁
+    </span>
+
+    <span class="level-number">
+        第一關
+    </span>
+
+    <span class="level-title">
+        認識肺結核
+    </span>
+
+</a>
+
+
+                <!-- 第二關 -->
+
+                <button
+    class="level level-2 locked"
+    onclick="startLevel(2)"
+>
+
+                    <span class="level-icon">
+                        🦠
+                    </span>
+
+                    <span class="level-number">
+                        第二關
+                    </span>
+
+                    <span class="level-title">
+                        傳染大挑戰
+                    </span>
+
+                    <span class="lock">
+                        🔒
+                    </span>
+
+                </button>
+
+
+                <!-- 第三關 -->
+
+                <button
+                    class="level level-3 locked"
+                    disabled
+                >
+
+                    <span class="level-icon">
+                        🛡️
+                    </span>
+
+                    <span class="level-number">
+                        第三關
+                    </span>
+
+                    <span class="level-title">
+                        保護自己
+                    </span>
+
+                    <span class="lock">
+                        🔒
+                    </span>
+
+                </button>
+
+
+                <!-- 第四關 -->
+
+                <button
+                    class="level level-4 locked"
+                    disabled
+                >
+
+                    <span class="level-icon">
+                        💊
+                    </span>
+
+                    <span class="level-number">
+                        第四關
+                    </span>
+
+                    <span class="level-title">
+                        吃藥大作戰
+                    </span>
+
+                    <span class="lock">
+                        🔒
+                    </span>
+
+                </button>
+
+
+                <!-- 第五關 -->
+
+                <button
+                    class="level level-5 locked"
+                    disabled
+                >
+
+                    <span class="level-icon">
+                        🔬
+                    </span>
+
+                    <span class="level-number">
+                        第五關
+                    </span>
+
+                    <span class="level-title">
+                        檢查探險
+                    </span>
+
+                    <span class="lock">
+                        🔒
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+            <div class="map-footer">
+
+                ⭐ 完成所有關卡，
+                就能挑戰最終的結核怪獸！
+
+            </div>
+
+        </div>
+
+    </main>
+
+<script>
+
+    const level1Completed =
+        localStorage.getItem(
+            "level1Completed"
+        );
+
+
+    if (level1Completed === "true") {
+
+        const level2 =
+            document.querySelector(
+                ".level-2"
+            );
+
+
+        level2.classList.remove(
+            "locked"
+        );
+
+
+        level2.classList.add(
+            "unlocked"
+        );
+
+
+        level2.querySelector(
+            ".lock"
+        ).textContent =
+            "🔓";
+
+    }
+
+</script>
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

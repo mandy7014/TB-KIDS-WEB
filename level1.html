@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>第一關｜認識肺結核</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <main class="game-page">
+
+        <div class="game-card">
+
+
+            <!-- 上方資訊 -->
+
+            <div class="game-header">
+
+                <span>
+                    🫁 第一關
+                </span>
+
+                <span id="score">
+                    ⭐ 0 分
+                </span>
+
+            </div>
+
+
+            <!-- 角色 -->
+
+            <div class="game-characters">
+
+                <div class="game-character">
+
+                    <div class="character-big">
+                        🫁
+                    </div>
+
+                    <div class="character-name">
+                        肺肺超人
+                    </div>
+
+                </div>
+
+
+                <div class="game-vs">
+                    VS
+                </div>
+
+
+                <div class="game-character">
+
+                    <div
+                        id="monster"
+                        class="character-big monster-character"
+                    >
+                        👾
+                    </div>
+
+                    <div class="character-name">
+                        結核怪獸
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 對話 -->
+
+            <div class="game-message">
+
+                <strong>
+                    👾 結核怪獸：
+                </strong>
+
+                <br>
+
+                哈哈哈！
+                你知道我是什麼嗎？
+
+            </div>
+
+
+            <!-- 題目 -->
+
+            <div class="question-box">
+
+                <h2>
+                    ❓ 肺結核是由什麼造成的？
+                </h2>
+
+
+                <div class="answer-options">
+
+
+                    <button
+                        class="answer"
+                        onclick="checkAnswer('bacteria')"
+                    >
+
+                        🦠 A. 細菌
+
+                    </button>
+
+
+                    <button
+                        class="answer"
+                        onclick="checkAnswer('virus')"
+                    >
+
+                        🧬 B. 病毒
+
+                    </button>
+
+
+                    <button
+                        class="answer"
+                        onclick="checkAnswer('mosquito')"
+                    >
+
+                        🦟 C. 蚊子
+
+                    </button>
+
+
+                    <button
+                        class="answer"
+                        onclick="checkAnswer('candy')"
+                    >
+
+                        🍬 D. 糖果
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- 回饋 -->
+
+            <div
+                id="feedback"
+                class="feedback"
+            ></div>
+
+
+            <!-- 下一步 -->
+
+            <button
+                id="next-button"
+                class="start-button"
+                onclick="finishLevel1()"
+                style="display:none;"
+            >
+
+                🎉 完成第一關
+
+            </button>
+
+
+        </div>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

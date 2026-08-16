@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>選擇小勇士</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <main class="character-page">
+
+        <div class="character-card">
+
+            <p class="small-title">
+                🦸 肺肺王國冒險開始！
+            </p>
+
+
+            <h1>
+                選擇你的小勇士
+            </h1>
+
+
+            <p class="character-intro">
+
+                接下來的冒險，
+                就由你來完成！
+
+                <br>
+
+                選一個你喜歡的角色吧！
+
+            </p>
+
+
+            <div class="character-options">
+
+
+                <!-- 男孩 -->
+
+                <button
+                    class="character-choice"
+                    onclick="selectCharacter('boy')"
+                >
+
+                    <div class="character-icon">
+                        👦
+                    </div>
+
+                    <div>
+                        小男孩
+                    </div>
+
+                </button>
+
+
+                <!-- 女孩 -->
+
+                <button
+                    class="character-choice"
+                    onclick="selectCharacter('girl')"
+                >
+
+                    <div class="character-icon">
+                        👧
+                    </div>
+
+                    <div>
+                        小女孩
+                    </div>
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                id="selected-message"
+                class="selected-message"
+            >
+
+                請選擇你的角色
+
+            </div>
+
+
+            <button
+                id="confirm-button"
+                class="start-button"
+                onclick="confirmCharacter()"
+                disabled
+            >
+
+                🚀 出發冒險！
+
+            </button>
+
+
+        </div>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
