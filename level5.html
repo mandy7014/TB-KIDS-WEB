@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第五關｜肺肺守護者－肺肺王國</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .level5-page {
+      min-height: 100vh;
+      padding: 30px 16px 70px;
+      background: linear-gradient(180deg, #e1efff, #fff5d8);
+      color: #40536c;
+      text-align: center;
+    }
+
+    .level5-container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .level5-title {
+      color: #4765b4;
+      font-size: clamp(28px, 6vw, 42px);
+      margin: 15px 0;
+    }
+
+    .level5-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 28px 22px;
+      margin: 25px auto;
+      box-shadow: 0 8px 24px #00000015;
+    }
+
+    .level5-icon {
+      font-size: 70px;
+      margin: 12px 0;
+    }
+
+    .level5-progress {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .level5-question {
+      font-size: 23px;
+      line-height: 1.8;
+      margin: 20px 0;
+    }
+
+    .level5-answer {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 17px;
+      background: #eaf2ff;
+      border: 3px solid #9bb9ef;
+      border-radius: 18px;
+      color: #334e83;
+      font-size: 19px;
+      cursor: pointer;
+    }
+
+    .level5-answer:hover {
+      background: #dceaff;
+    }
+
+    .level5-answer:disabled {
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    .level5-feedback {
+      min-height: 60px;
+      font-size: 19px;
+      line-height: 1.7;
+      font-weight: bold;
+      margin: 18px 0;
+    }
+
+    .level5-button {
+      padding: 14px 28px;
+      background: #ffab4a;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      margin: 8px;
+    }
+
+    #next-button {
+      display: none;
+    }
+
+    #finish-screen {
+      display: none;
+    }
+
+    #certificate {
+      display: none;
+      background: #fffdf4;
+      border: 8px double #e2b44f;
+      border-radius: 18px;
+      padding: 32px 18px;
+      margin: 25px auto;
+      color: #65502c;
+    }
+
+    .certificate-title {
+      color: #b57c18;
+      font-size: clamp(27px, 6vw, 38px);
+    }
+
+    .certificate-name {
+      font-size: 30px;
+      font-weight: bold;
+      color: #4865b4;
+      margin: 25px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .certificate-message {
+      font-size: 19px;
+      line-height: 1.9;
+    }
+
+    .level5-name-input {
+      width: 100%;
+      max-width: 300px;
+      padding: 14px;
+      border: 2px solid #a6b8df;
+      border-radius: 12px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .level5-back {
+      display: inline-block;
+      margin-top: 22px;
+      color: #4765b4;
+      text-decoration: none;
+    }
+
+    @media print {
+      body.level5-page {
+        background: white !important;
+        padding: 0;
+      }
+
+      .level5-container > h1,
+      .level5-container > p,
+      #game-screen,
+      #finish-screen,
+      .level5-back,
+      #print-button {
+        display: none !important;
+      }
+
+      #certificate {
+        display: block !important;
+        box-shadow: none;
+        margin: 25px auto;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body class="level5-page">
+
+  <main class="level5-container">
+
+    <p>🌈 肺肺王國冒險任務</p>
+
+    <h1 class="level5-title">
+      🏆 第五關：肺肺守護者
+    </h1>
+
+    <p>完成最終挑戰，成為健康守護英雄！</p>
+
+    <!-- 最終挑戰遊戲 -->
+    <section class="level5-card" id="game-screen">
+
+      <div class="level5-progress" id="progress">
+        第 1 題 / 共 5 題
+      </div>
+
+      <div class="level5-icon" id="question-icon">
+        🦠
+      </div>
+
+      <h2 id="question-title">最終挑戰</h2>
+
+      <p class="level5-question" id="question-text"></p>
+
+      <div id="answer-options"></div>
+
+      <p
+        class="level5-feedback"
+        id="feedback"
+        aria-live="polite">
+      </p>
+
+      <button
+        class="level5-button"
+        id="next-button"
+        onclick="nextQuestion()">
+        下一題 ➡️
+      </button>
+
+    </section>
+
+    <!-- 完成畫面 -->
+    <section class="level5-card" id="finish-screen">
+
+      <div class="level5-icon">🎉🏅🎉</div>
+
+      <h2>恭喜完成肺肺王國冒險！</h2>
+
+      <p id="final-score"></p>
+
+      <p>你已經學會許多守護健康的知識！</p>
+
+      <p>請輸入你的暱稱，領取專屬證書：</p>
+
+      <input
+        class="level5-name-input"
+        id="hero-name"
+        type="text"
+        maxlength="20"
+        placeholder="例如：小肺肺"
+        aria-label="守護者暱稱"
+      >
+
+      <div>
+        <button
+          class="level5-button"
+          onclick="createCertificate()">
+          📜 領取守護者證書
+        </button>
+      </div>
+
+      <button
+        class="level5-button"
+        onclick="restartGame()">
+        🔄 再玩一次
+      </button>
+
+    </section>
+
+    <!-- 通關證書 -->
+    <section id="certificate" aria-label="肺肺守護者證書">
+
+      <div class="level5-icon">🏆</div>
+
+      <h2 class="certificate-title">
+        肺肺守護者證書
+      </h2>
+
+      <p>特別頒發給</p>
+
+      <div class="certificate-name" id="certificate-name"></div>
+
+      <p class="certificate-message">
+        恭喜你完成肺肺王國的健康冒險！<br>
+        學會認識肺結核、預防傳染、<br>
+        保護自己及配合治療。<br>
+        正式成為<br>
+        ⭐ 肺肺王國健康守護英雄 ⭐
+      </p>
+
+      <p id="certificate-date"></p>
+
+      <p>🛡️ 健康知識・勇氣・關懷 🛡️</p>
+
+    </section>
+
+    <button
+      class="level5-button"
+      id="print-button"
+      style="display:none"
+      onclick="window.print()">
+      🖨️ 列印或儲存 PDF
+    </button>
+
+    <div>
+      <a class="level5-back" href="map.html">
+        🗺️ 返回冒險地圖
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    const questions = [
+      {
+        icon: "🦠",
+        title: "最終挑戰 1：認識肺結核",
+        text: "肺結核主要是透過什麼方式傳播？",
+        options: [
+          "共用鉛筆",
+          "吸入空氣中含有結核菌的微小粒子",
+          "握手"
+        ],
+        correct: 1,
+        explanation:
+          "傳染性肺結核患者可能在咳嗽、說話等活動時，讓結核菌進入空氣，其他人吸入後可能感染。"
+      },
+      {
+        icon: "🌬️",
+        title: "最終挑戰 2：健康環境",
+        text: "哪一種方式有助於降低肺結核傳播的風險？",
+        options: [
+          "改善室內通風",
+          "把所有窗戶關緊",
+          "讓空氣一直不流通"
+        ],
+        correct: 0,
+        explanation:
+          "良好的室內通風有助於降低空氣中結核菌累積的風險。"
+      },
+      {
+        icon: "😷",
+        title: "最終挑戰 3：咳嗽禮節",
+        text: "咳嗽時應該怎麼做？",
+        options: [
+          "直接對著朋友咳嗽",
+          "用衛生紙或手肘內側遮住口鼻",
+          "不需要遮住口鼻"
+        ],
+        correct: 1,
+        explanation:
+          "咳嗽時應遮住口鼻，使用衛生紙後要正確丟棄並清潔雙手。"
+      },
+      {
+        icon: "💊",
+        title: "最終挑戰 4：規律治療",
+        text: "肺結核治療期間，感覺好多了，應該怎麼做？",
+        options: [
+          "自行停藥",
+          "把藥送給別人",
+          "依照醫師指示繼續治療"
+        ],
+        correct: 2,
+        explanation:
+          "即使症狀改善，也不能自行停藥，應依照醫療團隊的指示完成治療。"
+      },
+      {
+        icon: "❤️",
+        title: "最終挑戰 5：關心朋友",
+        text: "如果朋友正在接受肺結核治療，哪一個做法比較適合？",
+        options: [
+          "嘲笑或排擠朋友",
+          "關心朋友，並遵守醫療團隊的防護建議",
+          "要求所有人永遠遠離朋友"
+        ],
+        correct: 1,
+        explanation:
+          "肺結核可以治療，我們應該關心朋友，也要遵守醫療團隊的感染防護建議。"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      answered = false;
+
+      document.getElementById("progress").textContent =
+        `第 ${currentQuestion + 1} 題 / 共 ${questions.length} 題　⭐ ${score} 分`;
+
+      document.getElementById("question-icon").textContent =
+        question.icon;
+
+      document.getElementById("question-title").textContent =
+        question.title;
+
+      document.getElementById("question-text").textContent =
+        question.text;
+
+      document.getElementById("feedback").textContent = "";
+
+      document.getElementById("next-button").style.display =
+        "none";
+
+      const container =
+        document.getElementById("answer-options");
+
+      container.innerHTML = "";
+
+      question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+
+        button.className = "level5-answer";
+        button.textContent = option;
+        button.onclick = () => checkAnswer(index);
+
+        container.appendChild(button);
+      });
+    }
+
+    function checkAnswer(selected) {
+      if (answered) return;
+
+      answered = true;
+
+      const question = questions[currentQuestion];
+      const correct = selected === question.correct;
+
+      if (correct) score++;
+
+      document.querySelectorAll(".level5-answer")
+        .forEach(button => {
+          button.disabled = true;
+        });
+
+      const feedback =
+        document.getElementById("feedback");
+
+      feedback.textContent =
+        (correct ? "🎉 答對了！ " : "💡 一起學習！ ") +
+        question.explanation;
+
+      feedback.style.color =
+        correct ? "#2e8b57" : "#d46b28";
+
+      document.getElementById("progress").textContent =
+        `第 ${currentQuestion + 1} 題 / 共 ${questions.length} 題　⭐ ${score} 分`;
+
+      const nextButton =
+        document.getElementById("next-button");
+
+      nextButton.textContent =
+        currentQuestion === questions.length - 1
+          ? "🏆 完成最終挑戰"
+          : "下一題 ➡️";
+
+      nextButton.style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      if (!answered) return;
+
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        finishGame();
+      }
+    }
+
+    function finishGame() {
+      localStorage.setItem("level5Completed", "true");
+
+      document.getElementById("game-screen").style.display =
+        "none";
+
+      document.getElementById("finish-screen").style.display =
+        "block";
+
+      document.getElementById("final-score").textContent =
+        `⭐ 你的成績：${score} / ${questions.length} 題`;
+    }
+
+    function createCertificate() {
+      const nameInput =
+        document.getElementById("hero-name").value.trim();
+
+      const heroName = nameInput || "勇敢的肺肺守護者";
+
+      document.getElementById("certificate-name").textContent =
+        heroName;
+
+      document.getElementById("certificate-date").textContent =
+        "完成日期：" +
+        new Date().toLocaleDateString("zh-TW");
+
+      document.getElementById("certificate").style.display =
+        "block";
+
+      document.getElementById("print-button").style.display =
+        "inline-block";
+
+      document.getElementById("certificate")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+
+    function restartGame() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+
+      document.getElementById("finish-screen").style.display =
+        "none";
+
+      document.getElementById("certificate").style.display =
+        "none";
+
+      document.getElementById("print-button").style.display =
+        "none";
+
+      document.getElementById("game-screen").style.display =
+        "block";
+
+      showQuestion();
+    }
+
+    showQuestion();
+  </script>
+
+
+<script src="js/zhuyin-data.js"></script>
+<script src="js/zhuyin.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>第三關｜保護自己－肺肺王國</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .level3-page {
+      min-height: 100vh;
+      padding: 35px 16px 70px;
+      text-align: center;
+      background: linear-gradient(#d9f4ff, #f3fff4);
+      color: #31516c;
+    }
+
+    .level3-container {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .level3-title {
+      color: #1769c2;
+      font-size: clamp(28px, 6vw, 42px);
+      margin: 15px 0;
+    }
+
+    .level3-card {
+      background: white;
+      border-radius: 28px;
+      padding: 30px 22px;
+      margin-top: 28px;
+      box-shadow: 0 8px 22px #00000012;
+    }
+
+    .level3-icon {
+      font-size: 75px;
+      margin: 12px 0;
+    }
+
+    .level3-question {
+      font-size: 23px;
+      line-height: 1.8;
+      margin: 22px 0;
+    }
+
+    .level3-answer {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      margin: 13px 0;
+      background: #e8f7ee;
+      border: 3px solid #78c78b;
+      border-radius: 18px;
+      color: #24533b;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .level3-answer:hover {
+      background: #d3f0df;
+    }
+
+    .level3-answer:disabled {
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    .level3-feedback {
+      min-height: 65px;
+      margin: 18px 0;
+      font-size: 19px;
+      line-height: 1.7;
+      font-weight: bold;
+    }
+
+    .level3-next {
+      display: none;
+      padding: 15px 35px;
+      background: #ff9f43;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 21px;
+      cursor: pointer;
+    }
+
+    .level3-progress {
+      font-size: 19px;
+      margin-top: 15px;
+    }
+
+    .level3-back {
+      display: inline-block;
+      margin-top: 30px;
+      color: #1769c2;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body class="level3-page">
+
+  <main class="level3-container">
+    <p>🌈 肺肺王國冒險任務</p>
+
+    <h1 class="level3-title">
+      🛡️ 第三關：保護自己
+    </h1>
+
+    <p>健康防護小達人，準備接受挑戰！</p>
+
+    <div class="level3-progress" id="progress">
+      第 1 題 / 共 4 題
+    </div>
+
+    <section class="level3-card" id="game-card">
+      <div class="level3-icon" id="question-icon">
+        😷
+      </div>
+
+      <h2 id="question-title">情境 1</h2>
+
+      <p class="level3-question" id="question-text"></p>
+
+      <div id="answer-options"></div>
+
+      <p class="level3-feedback" id="feedback"
+         aria-live="polite"></p>
+
+      <button class="level3-next" id="next-button"
+              onclick="nextQuestion()">
+        下一題 ➡️
+      </button>
+    </section>
+
+    <a class="level3-back" href="map.html">
+      🗺️ 返回冒險地圖
+    </a>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        icon: "😷",
+        title: "情境 1：咳嗽了！",
+        text: "小肺肺突然想咳嗽，應該怎麼做？",
+        options: [
+          "對著朋友咳嗽",
+          "用衛生紙或手肘內側遮住口鼻",
+          "直接用手掌遮住後不洗手"
+        ],
+        correct: 1,
+        explanation: "咳嗽時要遮住口鼻，使用過的衛生紙要丟進垃圾桶，並清潔雙手。"
+      },
+      {
+        icon: "🌬️",
+        title: "情境 2：教室的空氣",
+        text: "教室空氣不流通時，哪一個做法比較好？",
+        options: [
+          "在安全且適合的情況下改善通風",
+          "把所有門窗關緊",
+          "完全不需要注意空氣"
+        ],
+        correct: 0,
+        explanation: "改善室內通風，有助於降低空氣中病菌累積的風險。"
+      },
+      {
+        icon: "🏥",
+        title: "情境 3：身體不舒服",
+        text: "如果持續咳嗽、發燒或身體不舒服，應該怎麼辦？",
+        options: [
+          "一直忍耐，不告訴任何人",
+          "自己亂吃藥",
+          "告訴家長或照顧者，並尋求醫療協助"
+        ],
+        correct: 2,
+        explanation: "身體不舒服要告訴大人，必要時由醫護人員協助評估。"
+      },
+      {
+        icon: "🛡️",
+        title: "情境 4：一起守護健康",
+        text: "如果朋友正在接受肺結核治療，我們應該怎麼做？",
+        options: [
+          "嘲笑朋友，不再和他說話",
+          "關心朋友，並遵守醫護人員的防護建議",
+          "要求所有人永遠遠離朋友"
+        ],
+        correct: 1,
+        explanation: "肺結核可以治療，我們可以關心朋友，也要遵守醫護人員的防護指示。"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      answered = false;
+
+      document.getElementById("progress").textContent =
+        `第 ${currentQuestion + 1} 題 / 共 ${questions.length} 題　⭐ ${score} 分`;
+
+      document.getElementById("question-icon").textContent =
+        question.icon;
+
+      document.getElementById("question-title").textContent =
+        question.title;
+
+      document.getElementById("question-text").textContent =
+        question.text;
+
+      document.getElementById("feedback").textContent = "";
+
+      document.getElementById("next-button").style.display =
+        "none";
+
+      const container =
+        document.getElementById("answer-options");
+
+      container.innerHTML = "";
+
+      question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+
+        button.className = "level3-answer";
+        button.textContent = option;
+        button.onclick = () => checkLevel3Answer(index);
+
+        container.appendChild(button);
+      });
+    }
+
+    function checkLevel3Answer(selected) {
+      if (answered) return;
+
+      answered = true;
+
+      const question = questions[currentQuestion];
+      const correct = selected === question.correct;
+
+      if (correct) score++;
+
+      document.querySelectorAll(".level3-answer")
+        .forEach(button => {
+          button.disabled = true;
+        });
+
+      const feedback =
+        document.getElementById("feedback");
+
+      feedback.textContent =
+        (correct ? "🎉 答對了！ " : "💡 一起學習！ ") +
+        question.explanation;
+
+      feedback.style.color =
+        correct ? "#2e8b57" : "#d46b28";
+
+      document.getElementById("progress").textContent =
+        `第 ${currentQuestion + 1} 題 / 共 ${questions.length} 題　⭐ ${score} 分`;
+
+      const nextButton =
+        document.getElementById("next-button");
+
+      nextButton.textContent =
+        currentQuestion === questions.length - 1
+          ? "領取防護盾牌 🛡️"
+          : "下一題 ➡️";
+
+      nextButton.style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      if (!answered) return;
+
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        localStorage.setItem("level3Completed", "true");
+
+        alert(
+          `🎉 恭喜完成第三關！\n` +
+          `你答對 ${score} / 4 題！\n` +
+          `獲得健康防護盾牌 🛡️`
+        );
+
+        window.location.href = "map.html";
+      }
+    }
+
+    showQuestion();
+  </script>
+
+
+<script src="js/zhuyin-data.js"></script>
+<script src="js/zhuyin.js"></script>
+
+
+
+</body>
+</html>

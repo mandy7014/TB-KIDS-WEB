@@ -66,106 +66,86 @@
 
                 <!-- 第二關 -->
 
-                <button
+               
+<a
+    id="level2-link"
     class="level level-2 locked"
-    onclick="startLevel(2)"
+    href="#"
 >
+    <span class="level-icon">🦠</span>
+    <span class="level-number">第二關</span>
+    <span class="level-title">傳染大挑戰</span>
+    <span class="lock">🔒</span>
+</a>
+                   
 
-                    <span class="level-icon">
-                        🦠
-                    </span>
+       
+<!-- 第三關 -->
 
-                    <span class="level-number">
-                        第二關
-                    </span>
+<a
+    id="level3-link"
+    class="level level-3 locked"
+    href="#"
+>
+    <span class="level-icon">🛡️</span>
 
-                    <span class="level-title">
-                        傳染大挑戰
-                    </span>
+    <span class="level-number">
+        第三關
+    </span>
 
-                    <span class="lock">
-                        🔒
-                    </span>
+    <span class="level-title">
+        保護自己
+    </span>
 
-                </button>
-
-
-                <!-- 第三關 -->
-
-                <button
-                    class="level level-3 locked"
-                    disabled
-                >
-
-                    <span class="level-icon">
-                        🛡️
-                    </span>
-
-                    <span class="level-number">
-                        第三關
-                    </span>
-
-                    <span class="level-title">
-                        保護自己
-                    </span>
-
-                    <span class="lock">
-                        🔒
-                    </span>
-
-                </button>
+    <span class="lock">🔒</span>
+</a>
 
 
-                <!-- 第四關 -->
 
-                <button
-                    class="level level-4 locked"
-                    disabled
-                >
+                
+<!-- 第四關 -->
 
-                    <span class="level-icon">
-                        💊
-                    </span>
+<a
+    id="level4-link"
+    class="level level-4 locked"
+    href="#"
+>
+    <span class="level-icon">💊</span>
 
-                    <span class="level-number">
-                        第四關
-                    </span>
+    <span class="level-number">
+        第四關
+    </span>
 
-                    <span class="level-title">
-                        吃藥大作戰
-                    </span>
+    <span class="level-title">
+        吃藥大作戰
+    </span>
 
-                    <span class="lock">
-                        🔒
-                    </span>
-
-                </button>
+    <span class="lock">🔒</span>
+</a>
 
 
-                <!-- 第五關 -->
 
-                <button
-                    class="level level-5 locked"
-                    disabled
-                >
+               
+<!-- 第五關 -->
 
-                    <span class="level-icon">
-                        🔬
-                    </span>
+<a
+    id="level5-link"
+    class="level level-5 locked"
+    href="#"
+>
+    <span class="level-icon">🏆</span>
 
-                    <span class="level-number">
-                        第五關
-                    </span>
+    <span class="level-number">
+        第五關
+    </span>
 
-                    <span class="level-title">
-                        檢查探險
-                    </span>
+    <span class="level-title">
+        肺肺守護者
+    </span>
 
-                    <span class="lock">
-                        🔒
-                    </span>
+    <span class="lock">🔒</span>
+</a>
 
-                </button>
 
 
             </div>
@@ -182,41 +162,140 @@
 
     </main>
 
+
 <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-    const level1Completed =
-        localStorage.getItem(
-            "level1Completed"
-        );
+    const level2 = document.getElementById("level2-link");
 
+    const completed =
+        localStorage.getItem("level1Completed");
 
-    if (level1Completed === "true") {
+    if (completed === "true") {
 
-        const level2 =
-            document.querySelector(
-                ".level-2"
-            );
+        level2.classList.remove("locked");
+        level2.classList.add("unlocked");
 
+        level2.querySelector(".lock").textContent = "🔓";
 
-        level2.classList.remove(
-            "locked"
-        );
+        level2.href = "level2.html";
 
+    } else {
 
-        level2.classList.add(
-            "unlocked"
-        );
-
-
-        level2.querySelector(
-            ".lock"
-        ).textContent =
-            "🔓";
+        level2.addEventListener("click", function(event) {
+            event.preventDefault();
+            alert("🔒 請先完成第一關喔！");
+        });
 
     }
 
+});
 </script>
+
     <script src="js/script.js"></script>
+
+<script src="js/zhuyin.js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const level3Link =
+        document.getElementById("level3-link");
+
+    const level2Completed =
+        localStorage.getItem("level2Completed");
+
+    if (!level3Link) return;
+
+    if (level2Completed === "true") {
+
+        level3Link.classList.remove("locked");
+        level3Link.classList.add("unlocked");
+
+        level3Link.href = "level3.html";
+
+        level3Link.querySelector(".lock").textContent = "🔓";
+
+    } else {
+
+        level3Link.addEventListener("click", function (event) {
+            event.preventDefault();
+            alert("🔒 請先完成第二關喔！");
+        });
+
+    }
+
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const level4Link =
+        document.getElementById("level4-link");
+
+    if (!level4Link) return;
+
+    const level3Completed =
+        localStorage.getItem("level3Completed");
+
+    if (level3Completed === "true") {
+
+        level4Link.classList.remove("locked");
+        level4Link.classList.add("unlocked");
+
+        level4Link.href = "level4.html";
+
+        level4Link.querySelector(".lock").textContent = "🔓";
+
+    } else {
+
+        level4Link.addEventListener("click", function (event) {
+            event.preventDefault();
+            alert("🔒 請先完成第三關喔！");
+        });
+
+    }
+
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const level5Link =
+        document.getElementById("level5-link");
+
+    if (!level5Link) return;
+
+    const level4Completed =
+        localStorage.getItem("level4Completed");
+
+    if (level4Completed === "true") {
+
+        level5Link.classList.remove("locked");
+        level5Link.classList.add("unlocked");
+
+        level5Link.href = "level5.html";
+
+        level5Link.querySelector(".lock").textContent = "🔓";
+
+    } else {
+
+        level5Link.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            alert("🔒 請先完成第四關喔！");
+        });
+
+    }
+
+});
+</script>
+
 
 </body>
 

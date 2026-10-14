@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第四關｜吃藥大作戰－肺肺王國</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .level4-page {
+      min-height: 100vh;
+      padding: 35px 16px 70px;
+      background: linear-gradient(#fff0d9, #fffdf3);
+      color: #654b39;
+      text-align: center;
+    }
+
+    .level4-container {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .level4-title {
+      color: #e17b28;
+      font-size: clamp(28px, 6vw, 42px);
+      margin: 15px 0;
+    }
+
+    .level4-progress {
+      font-size: 19px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
+    .level4-card {
+      background: white;
+      border-radius: 28px;
+      padding: 30px 22px;
+      margin-top: 25px;
+      box-shadow: 0 8px 22px #00000012;
+    }
+
+    .level4-icon {
+      font-size: 75px;
+      margin: 12px 0;
+    }
+
+    .level4-question {
+      font-size: 23px;
+      line-height: 1.8;
+      margin: 22px 0;
+    }
+
+    .level4-answer {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      margin: 13px 0;
+      background: #fff3db;
+      border: 3px solid #ffc675;
+      border-radius: 18px;
+      color: #704d27;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .level4-answer:hover {
+      background: #ffe8bc;
+    }
+
+    .level4-answer:disabled {
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    .level4-feedback {
+      min-height: 65px;
+      margin: 18px 0;
+      font-size: 19px;
+      line-height: 1.7;
+      font-weight: bold;
+    }
+
+    .level4-next {
+      display: none;
+      padding: 15px 35px;
+      background: #ff9f43;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 21px;
+      cursor: pointer;
+    }
+
+    .level4-back {
+      display: inline-block;
+      margin-top: 30px;
+      color: #b66b2d;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body class="level4-page">
+
+  <main class="level4-container">
+
+    <p>🌈 肺肺王國冒險任務</p>
+
+    <h1 class="level4-title">
+      💊 第四關：吃藥大作戰
+    </h1>
+
+    <p>幫助肺肺超人，完成健康治療任務！</p>
+
+    <div class="level4-progress" id="progress">
+      第 1 題 / 共 4 題
+    </div>
+
+    <section class="level4-card">
+
+      <div class="level4-icon" id="question-icon">
+        💊
+      </div>
+
+      <h2 id="question-title">情境 1</h2>
+
+      <p class="level4-question" id="question-text"></p>
+
+      <div id="answer-options"></div>
+
+      <p
+        class="level4-feedback"
+        id="feedback"
+        aria-live="polite">
+      </p>
+
+      <button
+        class="level4-next"
+        id="next-button"
+        onclick="nextQuestion()">
+        下一題 ➡️
+      </button>
+
+    </section>
+
+    <a class="level4-back" href="map.html">
+      🗺️ 返回冒險地圖
+    </a>
+
+  </main>
+
+  <script>
+    const questions = [
+      {
+        icon: "💊",
+        title: "情境 1：吃藥時間到了",
+        text: "醫師開的肺結核藥物，應該怎麼吃？",
+        options: [
+          "想吃的時候才吃",
+          "依照醫師指示，按時服藥",
+          "覺得藥不好吃就不吃"
+        ],
+        correct: 1,
+        explanation:
+          "肺結核治療需要規律服藥，應依照醫師及醫療團隊的指示完成治療。"
+      },
+      {
+        icon: "😊",
+        title: "情境 2：感覺好多了",
+        text: "肺肺超人吃藥一段時間後，覺得不再咳嗽了，應該怎麼做？",
+        options: [
+          "自己決定停止吃藥",
+          "把剩下的藥送給朋友",
+          "繼續依照醫師指示服藥"
+        ],
+        correct: 2,
+        explanation:
+          "即使症狀改善，也不能自行停藥，應由醫師評估治療進度。"
+      },
+      {
+        icon: "🩺",
+        title: "情境 3：吃藥後不舒服",
+        text: "如果吃藥後出現不舒服的情況，應該怎麼辦？",
+        options: [
+          "立刻告訴家長或照顧者，並聯絡醫療團隊",
+          "自己偷偷減少藥量",
+          "什麼都不說，繼續忍耐"
+        ],
+        correct: 0,
+        explanation:
+          "服藥後若有不舒服，要及時告訴大人並聯絡醫療團隊，不要自行調整藥物。"
+      },
+      {
+        icon: "📅",
+        title: "情境 4：忘記吃藥了",
+        text: "如果發現忘記吃肺結核藥物，應該怎麼做？",
+        options: [
+          "下一次自己吃雙倍的藥",
+          "告訴家長或照顧者，詢問醫療團隊如何處理",
+          "以後都不用吃了"
+        ],
+        correct: 1,
+        explanation:
+          "漏服藥物時，不要自行補吃雙倍劑量，應依醫療團隊的個別指示處理。"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      answered = false;
+
+      document.getElementById("progress").textContent =
+        `第 ${currentQuestion + 1} 題 / 共 ${questions.length} 題　⭐ ${score} 分`;
+
+      document.getElementById("question-icon").textContent =
+        question.icon;
+
+      document.getElementById("question-title").textContent =
+        question.title;
+
+      document.getElementById("question-text").textContent =
+        question.text;
+
+      document.getElementById("feedback").textContent = "";
+
+      document.getElementById("next-button").style.display =
+        "none";
+
+      const container =
+        document.getElementById("answer-options");
+
+      container.innerHTML = "";
+
+      question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+
+        button.className = "level4-answer";
+        button.textContent = option;
+        button.onclick = () => checkAnswer(index);
+
+        container.appendChild(button);
+      });
+    }
+
+    function checkAnswer(selected) {
+      if (answered) return;
+
+      answered = true;
+
+      const question = questions[currentQuestion];
+      const correct = selected === question.correct;
+
+      if (correct) score++;
+
+      document.querySelectorAll(".level4-answer")
+        .forEach(button => {
+          button.disabled = true;
+        });
+
+      const feedback =
+        document.getElementById("feedback");
+
+      feedback.textContent =
+        (correct ? "🎉 答對了！ " : "💡 一起學習！ ") +
+        question.explanation;
+
+      feedback.style.color =
+        correct ? "#2e8b57" : "#d46b28";
+
+      document.getElementById("progress").textContent =
+        `第 ${currentQuestion + 1} 題 / 共 ${questions.length} 題　⭐ ${score} 分`;
+
+      const nextButton =
+        document.getElementById("next-button");
+
+      nextButton.textContent =
+        currentQuestion === questions.length - 1
+          ? "領取健康勇士徽章 🏅"
+          : "下一題 ➡️";
+
+      nextButton.style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      if (!answered) return;
+
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        localStorage.setItem("level4Completed", "true");
+
+        alert(
+          `🎉 恭喜完成第四關！\n` +
+          `你答對 ${score} / 4 題！\n` +
+          `獲得健康勇士徽章 🏅`
+        );
+
+        window.location.href = "map.html";
+      }
+    }
+
+    showQuestion();
+  </script>
+
+
+<script src="js/zhuyin-data.js"></script>
+<script src="js/zhuyin.js"></script>
+
+
+</body>
+</html>
