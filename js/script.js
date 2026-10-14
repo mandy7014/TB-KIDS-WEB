@@ -465,15 +465,17 @@ function nextLevel2Question() {
 }
 
 
+
+
 function finishLevel2() {
 
-    localStorage.setItem(
-        "level2Completed",
-        "true"
-    );
+    // 記錄第二關完成
+    localStorage.setItem("level2Completed", "true");
 
+    // 顯示過關訊息
+    alert("🎉 恭喜你完成第二關！");
 
-    window.location.href =
-        "map.html";
+    // 返回冒險地圖
+    window.location.href = "map.html";
 
 }
